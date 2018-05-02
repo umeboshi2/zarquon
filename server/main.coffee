@@ -24,10 +24,6 @@ HOST = process.env.NODE_IP or 'localhost'
 # create express app
 app = express()
 
-# health url required for openshift
-app.get '/health', (req, res, next) ->
-  res.end()
-
 app.locals.config = config
 
 Middleware.setup app
@@ -65,7 +61,8 @@ app.use '/thumbs', express.static(thumbsdir)
 #app.get '/', pages.make_page 'index'
 #app.use '/', (req, res, next) ->
 #  return res.redirect 307, 'dist/'
-  
+
+app.use '/', express.static(path.join __dirname, '../dist')
 
 server = http.createServer app
 serving_msg = "#{config.brand} server running on #{HOST}:#{PORT}."

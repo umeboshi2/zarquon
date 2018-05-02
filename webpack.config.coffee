@@ -40,7 +40,7 @@ if not publicPath.endsWith '/'
 WebPackOutput =
   filename: WebPackOutputFilename[BuildEnvironment]
   path: path.join __dirname, 'dist'
-  publicPath: '/'
+  #publicPath
   
 DefinePluginOpts =
   development:
@@ -166,13 +166,13 @@ if BuildEnvironment is 'production'
   CompressionPlugin = require 'compression-webpack-plugin'
   UglifyJsPlugin = require 'uglifyjs-webpack-plugin'
   OptimizeCssAssetsPlugin = require 'optimize-css-assets-webpack-plugin'
-  #extraPlugins.push new CleanPlugin(localBuildDir[BuildEnvironment])
+  extraPlugins.push new CleanPlugin(localBuildDir[BuildEnvironment])
   #extraPlugins.push new CompressionPlugin()
-  WebPackOptimization.minimizer = []
-  # new OptimizeCssAssetsPlugin()
-  # new UglifyJsPlugin
-  #   sourceMap: true
-  # ]
+  WebPackOptimization.minimizer = [
+   new OptimizeCssAssetsPlugin()
+   new UglifyJsPlugin
+     sourceMap: true
+   ]
   
 
 
