@@ -1,0 +1,2 @@
+
+self.postMessage {data: 'hello'}
